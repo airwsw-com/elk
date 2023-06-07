@@ -119,7 +119,7 @@ defineExpose({ createEntry, removeEntry, updateEntry })
       </div>
     </slot>
     <div v-else-if="state === 'error'" p5 text-secondary>
-      <div v-if="_error.name === 'MastoHttpUnauthorizedError' && singleInstanceServer" p5 lg:flex="~ col gap2">
+      <div v-if="_error.name === 'MastoHttpUnauthorizedError' && singleInstanceServer" p5 flex="~ col gap2">
         <button
           flex="~ row" gap-x-2 items-center justify-center btn-text text-center rounded-3
           :disabled="busy"
@@ -129,7 +129,9 @@ defineExpose({ createEntry, removeEntry, updateEntry })
             <span block i-ri:loader-2-fill aria-hidden="true" />
           </span>
           <span v-else aria-hidden="true" block i-ri:login-circle-line class="rtl-flip" />
-          {{ $t('action.sign_in') }}
+          <i18n-t keypath="action.sign_in_to">
+            {{ currentServer }}
+          </i18n-t>
         </button>
       </div>
       <div v-else text-center italic>
