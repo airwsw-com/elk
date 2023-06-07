@@ -47,6 +47,7 @@ const { t } = useI18n()
 const nuxtApp = useNuxtApp()
 
 const { items, prevItems, update, state, endAnchor, error } = usePaginator(paginator, $$(stream), eventType, preprocess)
+const _error = (error as any) as Error
 
 nuxtApp.hook('elk-logo:click', () => {
   update()
@@ -67,6 +68,8 @@ function updateEntry(item: any) {
 function removeEntry(entryId: any) {
   items.value = items.value.filter(i => (i as any)[keyProp] !== entryId)
 }
+
+const { busy, oauth, singleInstanceServer } = useSignIn()
 
 defineExpose({ createEntry, removeEntry, updateEntry })
 </script>
@@ -116,7 +119,24 @@ defineExpose({ createEntry, removeEntry, updateEntry })
       </div>
     </slot>
     <div v-else-if="state === 'error'" p5 text-secondary>
-      {{ t('common.error') }}: {{ error }}
+      <div v-if="_error.name === 'MastoHttpUnauthorizedError' && singleInstanceServer" p5 lg:flex="~ col gap2">
+        <button
+          flex="~ row" gap-x-2 items-center justify-center btn-text text-center rounded-3
+          :disabled="busy"
+          @click="oauth()"
+        >
+          <span v-if="busy" aria-hidden="true" block animate animate-spin preserve-3d class="rtl-flip">
+            <span block i-ri:loader-2-fill aria-hidden="true" />
+          </span>
+          <span v-else aria-hidden="true" block i-ri:login-circle-line class="rtl-flip" />
+          {{ $t('action.sign_in') }}
+        </button>
+      </div>
+      <div v-else text-center italic>
+        {{ t('common.error') }}: {{ _error.name }}
+        <br>
+        {{ _error.message }}
+      </div>
     </div>
   </div>
 </template>
