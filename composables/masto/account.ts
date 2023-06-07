@@ -27,15 +27,10 @@ export function getServerName(account: mastodon.v1.Account, hideDefaultServer = 
 }
 
 export function _getServerName(account: mastodon.v1.Account) {
-  let serverName = ''
-  if (account.acct?.includes('@'))
-    serverName = account.acct.split('@')[1]
-  else
-    // We should only lack the server name if we're on the same server as the account
-    serverName = currentInstance.value ? getInstanceDomain(currentInstance.value) : ''
+  const serverName: string = getServerName(account)
   const publicConfig = useRuntimeConfig().public
   if (serverName === publicConfig.defaultServer && publicConfig.singleInstance)
-    serverName = ''
+    return ''
   return serverName
 }
 
