@@ -4,13 +4,13 @@
     {
       "--theme-color-name": "#0369a1",
       "--c-primary": "rgb(var(--rgb-primary))",
-      "--c-primary-active": "#075985",
+      "--c-primary-active": "#005389",
       "--c-primary-light": "#0369a180",
-      "--c-primary-fade": "#0369a11a",
+      "--c-primary-fade": "#00659c1a",
       "--rgb-primary": "3, 105, 161",
       "--c-dark-primary": "rgb(var(--rgb-dark-primary))",
-      "--c-dark-primary-active": "#075985",
-      "--c-dark-primary-light": "#07598580",
+      "--c-dark-primary-active": "#00588e",
+      "--c-dark-primary-light": "#126da680",
       "--c-dark-primary-fade": "#0369a11a",
       "--rgb-dark-primary": "3, 105, 161"
     }
