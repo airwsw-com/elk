@@ -41,9 +41,7 @@ jobs:
           platforms: linux/amd64
           provenance: false
           push: ${{ github.event_name != 'pull_request' }}
-          tags: |
-            airwsw-com/elk:latest
-            ${{ steps.metal.outputs.tags }}
+          tags: ${{ steps.metal.outputs.tags }}
           labels: ${{ steps.metal.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
