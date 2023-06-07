@@ -4,7 +4,7 @@ import { DynamicScrollerItem } from 'vue-virtual-scroller'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import type { Paginator, WsEvents, mastodon } from 'masto'
 
-const { paginator, stream, account, buffer = 10, endMessage = true } = defineProps<{
+const { paginator, stream, account, buffer = 10, endMessage = true, isPinned = false } = defineProps<{
   paginator: Paginator<mastodon.v1.Status[], mastodon.v1.ListAccountStatusesParams>
   stream?: Promise<WsEvents>
   context?: mastodon.v2.FilterContext
@@ -12,6 +12,7 @@ const { paginator, stream, account, buffer = 10, endMessage = true } = definePro
   preprocess?: (items: mastodon.v1.Status[]) => mastodon.v1.Status[]
   buffer?: number
   endMessage?: boolean | string
+  isPinned?: boolean
 }>()
 
 const { formatNumber } = useHumanReadableNumber()
@@ -23,20 +24,20 @@ const showOriginSite = $computed(() =>
 </script>
 
 <template>
-  <CommonPaginator v-bind="{ paginator, stream, preprocess, buffer, endMessage }" :virtual-scroller="virtualScroller">
+  <CommonPaginator v-bind="{ paginator, stream, preprocess, buffer, endMessage }" :virtual-scroller="virtualScroller && !isPinned">
     <template #updater="{ number, update }">
       <button py-4 border="b base" flex="~ col" p-3 w-full text-primary font-bold @click="update">
         {{ $t('timeline.show_new_items', number, { named: { v: formatNumber(number) } }) }}
       </button>
     </template>
     <template #default="{ item, older, newer, active }">
-      <template v-if="virtualScroller">
+      <template v-if="virtualScroller && !isPinned">
         <DynamicScrollerItem :item="item" :active="active" tag="article">
           <StatusCard :status="item" :context="context" :older="older" :newer="newer" />
         </DynamicScrollerItem>
       </template>
       <template v-else>
-        <StatusCard :status="item" :context="context" :older="older" :newer="newer" />
+        <StatusCard :status="item" :context="context" :older="older" :newer="newer" :is-pinned="isPinned" />
       </template>
     </template>
     <template v-if="context === 'account' " #done="{ items }">
@@ -55,7 +56,7 @@ const showOriginSite = $computed(() =>
             {{ $t('menu.open_in_original_site') }}
           </NuxtLink>
         </template>
-        <span v-else-if="items.length === 0">No posts here!</span>
+        <span v-else-if="items.length === 0 && !isPinned">No posts here!</span>
       </div>
     </template>
   </CommonPaginator>

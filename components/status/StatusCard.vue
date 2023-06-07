@@ -20,6 +20,8 @@ const props = withDefaults(
     // When looking into a detailed view of a post, we can simplify the replying badges
     // to the main expanded post
     main?: mastodon.v1.Status
+
+    isPinned?: boolean
   }>(),
   { actions: true },
 )
@@ -70,9 +72,14 @@ const forceShow = ref(false)
 </script>
 
 <template>
-  <StatusLink :status="status" :hover="hover">
+  <StatusLink :status="status" :hover="hover" :class="isPinned ? '!pb-0' : ''">
     <!-- Upper border -->
-    <div :h="showUpperBorder ? '1px' : '0'" w-auto bg-border mb-1 />
+    <div v-if="!isPinned" :h="showUpperBorder ? '1px' : '0'" w-auto bg-border mb-1 />
+
+    <div v-if="isPinned" flex items-center text-sm font-bold mt-2>
+      <span ml-10 me-3 i-ri:pushpin-2-fill text-xs aria-hidden="true" />
+      {{ $t('status.pinned_post') }}
+    </div>
 
     <slot name="meta">
       <!-- Line connecting to previous status -->
@@ -187,5 +194,8 @@ const forceShow = ref(false)
         </div>
       </template>
     </div>
+
+    <!-- Downer border -->
+    <div v-if="isPinned" h="1px" w-auto bg-border mt-1 />
   </StatusLink>
 </template>
