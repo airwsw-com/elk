@@ -23,7 +23,7 @@ const emit = defineEmits<{
     </p>
     <p>
       {{ $t('help.desc_para4') }}
-      <NuxtLink font-bold text-primary href="https://github.com/elk-zone/elk" target="_blank">
+      <NuxtLink font-bold text-primary href="https://github.com/airwsw-com/elk" target="_blank">
         {{ $t('help.desc_para5') }}
       </NuxtLink>
       {{ $t('help.desc_para6') }}

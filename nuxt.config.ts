@@ -104,8 +104,8 @@ export default defineNuxtConfig({
       // our default translation server #76
       translateApi: '',
       // Use the instance where Elk has its Mastodon account as the default
-      defaultServer: 'm.webtoo.ls',
-      singleInstance: false,
+      defaultServer: 'social.airwsw.com',
+      singleInstance: true,
     },
     storage: {
       fsBase: 'node_modules/.cache/app',
@@ -257,6 +257,7 @@ export default defineNuxtConfig({
   unlazy: {
     ssr: false,
   },
+  telemetry: false,
 })
 
 declare global {

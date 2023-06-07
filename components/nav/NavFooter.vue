@@ -50,7 +50,7 @@ function toggleDark() {
       <NuxtLink
         v-if="buildInfo.env === 'release'"
         external
-        :href="`https://github.com/elk-zone/elk/releases/tag/v${buildInfo.version}`"
+        :href="`https://github.com/airwsw-com/elk/releases/tag/v${buildInfo.version}`"
         target="_blank"
         font-mono
       >
@@ -61,7 +61,7 @@ function toggleDark() {
         &middot;
         <NuxtLink
           external
-          :href="`https://github.com/elk-zone/elk/commit/${buildInfo.commit}`"
+          :href="`https://github.com/airwsw-com/elk/commit/${buildInfo.commit}`"
           target="_blank"
           font-mono
         >
@@ -79,16 +79,16 @@ function toggleDark() {
           {{ $t('nav.privacy') }}
         </NuxtLink>
       </template>
-      &middot;
-      <NuxtLink href="/m.webtoo.ls/@elk" target="_blank">
+      <!-- &middot; -->
+      <!-- <NuxtLink href="/m.webtoo.ls/@elk" target="_blank">
         Mastodon
-      </NuxtLink>
-      &middot;
-      <NuxtLink href="https://chat.elk.zone" target="_blank" external>
+      </NuxtLink> -->
+      <!-- &middot; -->
+      <!-- <NuxtLink href="https://chat.elk.zone" target="_blank" external>
         Discord
-      </NuxtLink>
+      </NuxtLink> -->
       &middot;
-      <NuxtLink href="https://github.com/elk-zone/elk" target="_blank" external>
+      <NuxtLink href="https://github.com/airwsw-com/elk" target="_blank" external>
         GitHub
       </NuxtLink>
     </div>

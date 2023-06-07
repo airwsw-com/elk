@@ -58,22 +58,22 @@ function handleShowCommit() {
       @click="openPreviewHelp"
     />
 
-    <SettingsItem
+    <!-- <SettingsItem
       text="Mastodon"
       icon="i-ri:mastodon-line"
       to="/m.webtoo.ls/@elk"
       large target="_blank"
-    />
-    <SettingsItem
+    /> -->
+    <!-- <SettingsItem
       text="Discord"
       icon="i-ri:discord-fill"
       to="https://chat.elk.zone"
       external large target="_blank"
-    />
+    /> -->
     <SettingsItem
       text="GitHub"
       icon="i-ri:github-fill"
-      to="https://github.com/elk-zone/elk"
+      to="https://github.com/airwsw-com/elk"
       external large target="_blank"
     />
 
