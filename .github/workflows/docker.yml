@@ -3,13 +3,11 @@ on:
   push:
     branches:
       - main
-      - elk.airwsw.com
     tags:
       - '*'
   pull_request:
     branches:
       - main
-      - elk.airwsw.com
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -42,7 +40,8 @@ jobs:
           context: .
           platforms: linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.metal.outputs.tags }}
+          # tags: ${{ steps.metal.outputs.tags }}
+          tags: airwsw-com/elk:latest
           labels: ${{ steps.metal.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
