@@ -27,7 +27,7 @@ if (account) {
 <template>
   <div>
     <AccountTabs />
-    <TimelinePaginator :paginator="paginatorPinned" :preprocess="reorderAndFilter" context="account" :account="account" :is-pinned="true" />
+    <TimelinePaginator :paginator="paginatorPinned" :preprocess="reorderAndFilter" context="account" :account="account" :end-message="false" :is-pinned="true" />
     <TimelinePaginator :paginator="paginator" :preprocess="reorderAndFilter" context="account" :account="account" />
   </div>
 </template>
